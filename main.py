@@ -34,8 +34,14 @@ def main() -> None:
         )
     if not text.strip():
         raise RuntimeError("entry must not be only white space")
+    if text != text.strip():
+        raise RuntimeError(
+            "entry must not carry leading or trailing white space"
+        )
     if len(text.split()) != 1:
         raise RuntimeError("entry must be exactly one word")
+    if not text.isalpha():
+        raise RuntimeError("entry must be letters only")
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     OUTPUT_FILE.write_bytes(source)
